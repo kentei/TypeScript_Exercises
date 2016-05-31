@@ -68,4 +68,55 @@ let bubbleSortTest = function() {
   console.log("交換数:" + counter + "回");
 };
 
-bubbleSortTest();
+// 一時的に値を持たせておく配列
+let temp = [];
+
+/**
+ * マージソート
+ */
+let margeSort = function(unSortedArray: number[], left: number, right: number){
+  if (left >= right) { return; }
+
+  let mid: number = Math.floor((left + right) / 2);
+  let i: number, j: number, k: number;
+
+  // バラバラにするために再帰呼び出し
+  margeSort(unSortedArray, left, mid);
+  margeSort(unSortedArray, mid + 1, right);
+
+  for (let i = left; i <= mid; i++) {
+    temp[i] = unSortedArray[i];
+  }
+
+   for (let i = mid + 1, j = right; i <= right; i++, j--) {
+     temp[i] = unSortedArray[j];
+   }
+
+   i = left;
+   j = right;
+
+   for (k = left; k <= right; k++) {
+     // ソート処理
+     if (temp[i] <= temp[j]) {
+       unSortedArray[k] = temp[i++];
+       counter++;
+     } else {
+       unSortedArray[k] = temp[j--];
+     }
+   }
+};
+
+/**
+ * クイックソートテスト
+ */
+let margeSortTest = function() {
+  let unSortedArray: number[] = createRandomNumArray(100, 100, false);
+  let targetArray: number[] = unSortedArray.concat();
+  margeSort(targetArray, 0, unSortedArray.length - 1);
+  console.log(unSortedArray);
+  console.log(targetArray);
+  console.log("交換数:" + counter + "回");
+};
+
+// bubbleSortTest();
+margeSortTest();
