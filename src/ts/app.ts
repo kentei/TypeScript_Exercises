@@ -107,7 +107,7 @@ let margeSort = function(unSortedArray: number[], left: number, right: number){
 };
 
 /**
- * クイックソートテスト
+ * マージソートテスト
  */
 let margeSortTest = function() {
   let unSortedArray: number[] = createRandomNumArray(100, 100, false);
@@ -118,5 +118,42 @@ let margeSortTest = function() {
   console.log("交換数:" + counter + "回");
 };
 
+/**
+ * オーダーnでいけるやつ
+ */
+ let originSort = function(unSortedArray: number[]){
+   let temp: number[] = [];
+   let sorted: number[] = [];
+   for ( let i = 0; i < unSortedArray.length; i++) {
+     // 初期化
+     temp[i] = 0;
+   }
+   for ( let i = 0; i < unSortedArray.length; i++) {
+     temp[unSortedArray[i]]++;
+     counter++;
+   }
+
+   let index = 0;
+   for ( let j = 0; j < temp.length; j++) {
+     if (temp[j] !== 0) {
+       sorted[index] = j;
+       index++;
+     }
+   }
+   return sorted;
+ };
+
+ /**
+  * オーダーnでいけるやつテスト
+  */
+ let originSortTest = function() {
+   let unSortedArray: number[] = createRandomNumArray(100, 100, false);
+   let targetArray: number[] = unSortedArray.concat();
+   console.log(unSortedArray);
+   console.log(originSort(targetArray));
+   console.log("交換数:" + counter + "回");
+ };
+
 // bubbleSortTest();
-margeSortTest();
+// margeSortTest();
+originSortTest();
